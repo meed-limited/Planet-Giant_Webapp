@@ -6,8 +6,8 @@ import App from "./App";
 import "./index.css";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
-const APP_ID = "ytDKAUvHS2OfN9hnjUwrKWAD59DmBNeBS0TdDc1q";
-const SERVER_URL = "https://dgsd2tljzqio.usemoralis.com:2053/server";
+const APP_ID = process.env.REACT_APP_MORALIS_APPLICATION_ID;
+const SERVER_URL = process.env.REACT_APP_MORALIS_SERVER_URL;
 
 const Application = () => {
   return (

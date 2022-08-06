@@ -116,7 +116,7 @@ function Account() {
                     }
                     await authenticate({
                       provider: connectorId,
-                      signingMessage: "Welcome to the New Lepricon Wallet!",
+                      signingMessage: "Welcome to World of Giants!",
                     });
                     window.localStorage.setItem("connectorId", connectorId);
 
