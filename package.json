@@ -1,0 +1,72 @@
+{
+  "name": "world-of-giants",
+  "version": "0.1.0",
+  "author": "Pedrojok01",
+  "dependencies": {
+    "@ant-design/icons": "^4.7.0",
+    "@walletconnect/web3-provider": "^1.7.8",
+    "antd": "^4.21.7",
+    "assert": "^2.0.0",
+    "bignumber.js": "^9.0.2",
+    "chai": "^4.3.6",
+    "crypto-browserify": "^3.12.0",
+    "ethers": "^5.6.9",
+    "https-browserify": "^1.0.0",
+    "magic-sdk": "9.0.0",
+    "moralis": "^1.9.1",
+    "os-browserify": "^0.3.0",
+    "react": "18.2.0",
+    "react-app-rewired": "^2.2.1",
+    "react-blockies": "^1.4.1",
+    "react-dom": "18.2.0",
+    "react-moralis": "^1.4.0",
+    "react-router": "6.3.0",
+    "react-router-dom": "6.3.0",
+    "react-scripts": "^5.0.1",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "url": "^0.11.0",
+    "web3uikit": "0.1.126",
+    "yarn": "^1.22.19"
+  },
+  "scripts": {
+    "start": "set \"GENERATE_SOURCEMAP=false\" && react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject",
+    "devchain": "node Truffle/scripts/devChain.js",
+    "connect": "moralis-admin-cli connect-local-devchain",
+    "lint:check": "eslint .",
+    "lint:fix": "eslint --fix",
+    "prettier:check": "prettier --check .",
+    "prettier:fix": "prettier --write \"**/*.{sol,js,jsx,ts,tsx,css,md,json,html}\" .prettierrc --config ./.prettierrc",
+    "slither": "slither ./Truffle/contracts --truffle-build-directory ./Truffle --solc-remaps @openzeppelin=node_modules/@openzeppelin --exclude naming-convention,external-function,low-level-calls --buidler-ignore-compile"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@truffle/hdwallet-provider": "^2.0.12",
+    "dotenv": "^16.0.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^2.7.1"
+  }
+}
