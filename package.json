@@ -13,7 +13,7 @@
     "ethers": "^5.6.9",
     "https-browserify": "^1.0.0",
     "magic-sdk": "9.0.0",
-    "moralis": "^1.9.1",
+    "moralis-v1": "1.11.0",
     "os-browserify": "^0.3.0",
     "react": "18.2.0",
     "react-app-rewired": "^2.2.1",
