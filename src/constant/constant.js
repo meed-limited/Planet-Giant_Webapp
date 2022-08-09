@@ -5,5 +5,6 @@ export const IS_PRODUCTION = false;
  **********************/
 
 // Development
-export const TEST_NFT = "0x1d7bcd9CfAA5A9BBBE715Db1Ec7aC7388bf4Aa0d"; // CRONOS_Testnet
+export const TEST_NFT = "0xDd957372cA874b55A918C7C07907F01438B66b55"; // CRONOS_Testnet
 export const TEST_NFT_PERSO = "0xe841128435D71364BeadD05E5d71CEF5016f0547"; // CRONOS_Testnet
+// export const TEST_NFT_PERSO = "0x6622A2945113243ebE843E57A913072e6039C8E7"; // CRONOS_Testnet
