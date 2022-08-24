@@ -116,7 +116,7 @@ function Account() {
                     }
                     await authenticate({
                       provider: connectorId,
-                      signingMessage: "Welcome to World of Giants!",
+                      signingMessage: "Welcome to Planet Giants!",
                     });
                     window.localStorage.setItem("connectorId", connectorId);
 

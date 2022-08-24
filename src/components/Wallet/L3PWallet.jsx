@@ -91,7 +91,7 @@ const L3PWallet = () => {
       ) : (
         <>
           <div style={styles.box}>
-            <div style={styles.title}>World of Giants NFTs:</div>
+            <div style={styles.title}>Planet Giants NFTs:</div>
             <Divider />
 
             <DisplayNFT userNFTs={userNFTs} action={handleTransferClick} chainId={chainId} isSelection={false} />

@@ -13,7 +13,7 @@ import ultranova_logo from "./assets/ultranova_logo.png";
 import "antd/dist/antd.css";
 import "./style.css";
 
-const { Header } = Layout;
+const { Header, Footer } = Layout;
 
 const styles = {
   layout: {
@@ -65,6 +65,15 @@ const styles = {
     width: "100px",
     height: "40px",
   },
+  footer: {
+    position: "fixed",
+    textAlign: "center",
+    width: "100%",
+    bottom: "0",
+    fontWeight: "800",
+    backgroundColor: "transparent",
+    color: "white",
+  },
 };
 const App = () => {
   const { account, isWeb3Enabled, enableWeb3, isAuthenticated, isWeb3EnableLoading } = useMoralis();
@@ -84,30 +93,45 @@ const App = () => {
     <Layout style={styles.layout}>
       {isMobile && <NoMobile />}
       {!isMobile && (
-        <Router>
-          <Header style={styles.header}>
-            <Logo />
-            <div style={styles.headerRight}>
-              <Chains />
-              <NativeBalance />
-              <Account />
+        <>
+          <Router>
+            <Header style={styles.header}>
+              <Logo />
+              <div style={styles.headerRight}>
+                <Chains />
+                <NativeBalance />
+                <Account />
+              </div>
+            </Header>
+
+            <div style={styles.content}>
+              <AccountVerification />
+              <ChainVerification setIsSupportedChain={setIsSupportedChain} />
+
+              {isAuthenticated && account && isSupportedChain && (
+                <Routes>
+                  <Route path="/wallet" element={<L3PWallet />} />
+
+                  <Route path="*" element={<Navigate to="/wallet" />} />
+                  <Route path="/nonauthenticated" element={<>Please login using the "Authenticate" button</>} />
+                </Routes>
+              )}
             </div>
-          </Header>
-
-          <div style={styles.content}>
-            <AccountVerification />
-            <ChainVerification setIsSupportedChain={setIsSupportedChain} />
-
-            {isAuthenticated && account && isSupportedChain && (
-              <Routes>
-                <Route path="/wallet" element={<L3PWallet />} />
-
-                <Route path="*" element={<Navigate to="/wallet" />} />
-                <Route path="/nonauthenticated" element={<>Please login using the "Authenticate" button</>} />
-              </Routes>
-            )}
-          </div>
-        </Router>
+          </Router>
+          <Footer style={styles.footer}>
+            <div style={{ display: "block" }}>
+              Powered By{" "}
+              <a
+                href="https://www.superultra.io/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ fontSize: "18px" }}
+              >
+                Super Ultra
+              </a>
+            </div>
+          </Footer>
+        </>
       )}
     </Layout>
   );

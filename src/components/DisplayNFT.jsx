@@ -52,6 +52,17 @@ const DisplayNFT = ({ userNFTs, action, chainId, isSelection, setSelectedNFT, se
     } else return;
   };
 
+  const getLevelAttributes = (nft) => {
+    let metaJSON = nft.metadata;
+    if (metaJSON !== null) {
+      for (let i = 0; i < metaJSON.attributes.length; i++) {
+        if (metaJSON.attributes[i].trait_type && metaJSON.attributes[i].trait_type === "Level") {
+          return metaJSON.attributes[i].value;
+        }
+      }
+    } else return;
+  };
+
   return (
     <>
       <div style={styles.NFTs}>
@@ -70,9 +81,11 @@ const DisplayNFT = ({ userNFTs, action, chainId, isSelection, setSelectedNFT, se
 
               let attributes = (
                 <div>
-                  <span>boost: {getBoostAttributes(nft)}%</span>
+                  <span>{getBoostAttributes(nft)}%</span>
                   <br></br>
                   <span>Serie: {getSerieAttributes(nft)}</span>
+                  <br></br>
+                  <span>Level: {getLevelAttributes(nft)}</span>
                 </div>
               );
 

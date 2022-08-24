@@ -1,5 +1,5 @@
 {
-  "name": "world-of-giants",
+  "name": "planet-giants",
   "version": "0.1.0",
   "author": "Pedrojok01",
   "dependencies": {
@@ -19,7 +19,7 @@
     "react-app-rewired": "^2.2.1",
     "react-blockies": "^1.4.1",
     "react-dom": "18.2.0",
-    "react-moralis": "^1.4.0",
+    "react-moralis": "1.4.0",
     "react-router": "6.3.0",
     "react-router-dom": "6.3.0",
     "react-scripts": "^5.0.1",
