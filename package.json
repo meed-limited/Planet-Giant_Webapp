@@ -5,15 +5,14 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@walletconnect/web3-provider": "^1.7.8",
-    "antd": "^4.21.7",
+    "@web3auth/web3auth": "^2.0.2",
+    "antd": "^4.22.8",
     "assert": "^2.0.0",
-    "bignumber.js": "^9.0.2",
-    "chai": "^4.3.6",
     "crypto-browserify": "^3.12.0",
     "ethers": "^5.6.9",
     "https-browserify": "^1.0.0",
     "magic-sdk": "9.0.0",
-    "moralis-v1": "1.11.0",
+    "moralis": "1.11.0",
     "os-browserify": "^0.3.0",
     "react": "18.2.0",
     "react-app-rewired": "^2.2.1",
@@ -26,7 +25,6 @@
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "url": "^0.11.0",
-    "web3uikit": "0.1.126",
     "yarn": "^1.22.19"
   },
   "scripts": {
@@ -36,10 +34,8 @@
     "eject": "react-app-rewired eject",
     "devchain": "node Truffle/scripts/devChain.js",
     "connect": "moralis-admin-cli connect-local-devchain",
-    "lint:check": "eslint .",
-    "lint:fix": "eslint --fix",
-    "prettier:check": "prettier --check .",
-    "prettier:fix": "prettier --write \"**/*.{sol,js,jsx,ts,tsx,css,md,json,html}\" .prettierrc --config ./.prettierrc",
+    "lint": "eslint --fix",
+    "prettier": "prettier --write \"**/*.{sol,js,jsx,ts,tsx,css,md,json,html}\" .prettierrc --config ./.prettierrc",
     "slither": "slither ./Truffle/contracts --truffle-build-directory ./Truffle --solc-remaps @openzeppelin=node_modules/@openzeppelin --exclude naming-convention,external-function,low-level-calls --buidler-ignore-compile"
   },
   "eslintConfig": {
@@ -61,8 +57,8 @@
     ]
   },
   "devDependencies": {
-    "@truffle/hdwallet-provider": "^2.0.12",
-    "dotenv": "^16.0.1",
+    "@truffle/hdwallet-provider": "^2.0.14",
+    "dotenv": "^16.0.2",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.30.1",

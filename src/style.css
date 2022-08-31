@@ -14,14 +14,15 @@
 }
 
 .ant-menu-horizontal > .ant-menu-item a {
-  color: #455a52 !important;
+  color: white !important;
 }
 .ant-menu-horizontal > .ant-menu-item a:hover {
-  color: #21bf96 !important;
+  color: white !important;
+  transform: scale(1.5) !important;
 }
 
 .ant-menu-horizontal > .ant-menu-submenu > .ant-menu-submenu-title {
-  color: #455a52 !important;
+  color: white !important;
 }
 
 .ant-spin-blur {
@@ -63,4 +64,17 @@
 }
 s .ant-modal-title {
   font-size: 20px !important;
+}
+
+/* /* .ant-spin {
+  color: white !important;
+} */
+.ant-spin-dot {
+  font-size: 60px;
+}
+
+.ant-spin-dot-item {
+  width: 30px;
+  height: 30px;
+  background-color: white;
 }

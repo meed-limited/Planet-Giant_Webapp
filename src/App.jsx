@@ -2,18 +2,20 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Navigate } from "react-router";
 import { useMoralis } from "react-moralis";
-import { NoMobile, NativeBalance } from "./components";
-import { Account, AccountVerification } from "./components/Account";
-import { Chains, ChainVerification } from "./components/Chains";
-import L3PWallet from "components/Wallet/L3PWallet";
-import { useWindowWidthAndHeight } from "./hooks/useWindowWidthAndHeight";
+import { AccountVerification } from "./components/Account";
+import { ChainVerification } from "./components/Chains";
+import CustomHeader from "components/Header/CustomHeader";
+import Dashboard from "components/Content/Dashboard/Dashboard";
+import Marketplace from "components/Content/Marketplace/Marketplace";
+// import { useWindowWidthAndHeight } from "./hooks/useWindowWidthAndHeight";
 import { Layout } from "antd";
 import background from "./assets/background.jpg";
-import ultranova_logo from "./assets/ultranova_logo.png";
+
 import "antd/dist/antd.css";
 import "./style.css";
+import { IS_PRODUCTION } from "constant/constant";
 
-const { Header, Footer } = Layout;
+const { Footer } = Layout;
 
 const styles = {
   layout: {
@@ -26,33 +28,21 @@ const styles = {
     overflow: "auto",
     fontFamily: "Sora, sans-serif",
   },
+  wrapper: {
+    position: "fixed",
+    width: "100%",
+    top: 0,
+    marginBottom: "100px !important",
+  },
   content: {
     display: "flex",
     justifyContent: "center",
     alignItems: "flex-start",
     color: "#041836",
-    marginTop: "100px",
+    marginBlock: "60px 70px",
     padding: "10px",
     overflow: "auto",
-  },
-  header: {
-    position: "fixed",
-    zIndex: 1,
-    width: "100%",
-    backgroundColor: "transparent",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "0 10px",
-    boxShadow: "0 1px 10px rgb(151 164 175 / 10%)",
-  },
-  headerRight: {
-    display: "flex",
-    gap: "10px",
-    alignItems: "center",
-    paddingRight: "10px",
-    fontSize: "15px",
-    fontWeight: "600",
+    height: "75vh",
   },
   adminButton: {
     display: "flex",
@@ -76,11 +66,22 @@ const styles = {
   },
 };
 const App = () => {
-  const { account, isWeb3Enabled, enableWeb3, isAuthenticated, isWeb3EnableLoading } = useMoralis();
-  const [width] = useWindowWidthAndHeight();
-  const [isSupportedChain, setIsSupportedChain] = useState("");
+  const { account, chainId, isWeb3Enabled, enableWeb3, isAuthenticated, isWeb3EnableLoading } = useMoralis();
+  // const [width] = useWindowWidthAndHeight();
+  const [isSupportedChain, setIsSupportedChain] = useState();
 
-  const isMobile = width <= 768;
+  // const isMobile = width <= 768;
+
+  useEffect(() => {
+    if (chainId) {
+      if (IS_PRODUCTION && chainId === "0x19") {
+        setIsSupportedChain(true);
+      } else if (!IS_PRODUCTION && chainId === "0x152") {
+        setIsSupportedChain(true);
+      } else setIsSupportedChain(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chainId, IS_PRODUCTION]);
 
   useEffect(() => {
     const connectorId = window.localStorage.getItem("connectorId");
@@ -91,52 +92,35 @@ const App = () => {
 
   return (
     <Layout style={styles.layout}>
-      {isMobile && <NoMobile />}
-      {!isMobile && (
-        <>
-          <Router>
-            <Header style={styles.header}>
-              <Logo />
-              <div style={styles.headerRight}>
-                <Chains />
-                <NativeBalance />
-                <Account />
-              </div>
-            </Header>
+      <Router>
+        <div style={styles.wrapper}>
+          {chainId && !isSupportedChain && <ChainVerification />}
+          <CustomHeader />
 
-            <div style={styles.content}>
-              <AccountVerification />
-              <ChainVerification setIsSupportedChain={setIsSupportedChain} />
+          <div style={styles.content}>
+            <AccountVerification />
 
-              {isAuthenticated && account && isSupportedChain && (
-                <Routes>
-                  <Route path="/wallet" element={<L3PWallet />} />
-
-                  <Route path="*" element={<Navigate to="/wallet" />} />
-                  <Route path="/nonauthenticated" element={<>Please login using the "Authenticate" button</>} />
-                </Routes>
-              )}
-            </div>
-          </Router>
-          <Footer style={styles.footer}>
-            <div style={{ display: "block" }}>
-              Powered By{" "}
-              <a
-                href="https://www.superultra.io/"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ fontSize: "18px" }}
-              >
-                Super Ultra
-              </a>
-            </div>
-          </Footer>
-        </>
-      )}
+            {isAuthenticated && account && isSupportedChain && (
+              <Routes>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/marketplace" element={<Marketplace isSupportedChain={isSupportedChain} />} />
+                <Route path="*" element={<Navigate to="/dashboard" />} />
+                <Route path="/nonauthenticated" element={<>Please login using the "Authenticate" button</>} />
+              </Routes>
+            )}
+          </div>
+        </div>
+      </Router>
+      <Footer style={styles.footer}>
+        <div style={{ display: "block" }}>
+          Powered By{" "}
+          <a href="https://www.superultra.io/" target="_blank" rel="noopener noreferrer" style={{ fontSize: "18px" }}>
+            Super Ultra
+          </a>
+        </div>
+      </Footer>
     </Layout>
   );
 };
-
-export const Logo = () => <img src={ultranova_logo} alt="ultranova_logo" width="180px" />;
 
 export default App;

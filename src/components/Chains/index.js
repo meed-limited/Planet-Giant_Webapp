@@ -1,2 +1,1 @@
-export { default as Chains } from "./Chains";
-export { default as ChainVerification } from "./ChainVerification";
+export { default as ChainVerification } from "./ChainVerification.jsx";
