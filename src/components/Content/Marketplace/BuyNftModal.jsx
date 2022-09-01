@@ -64,13 +64,13 @@ const BuyNftModal = ({ nftToBuy, setVisibility, visible }) => {
   };
 
   const getAttributesBoost = (nft) => {
-    const attributes = nft.metadata.attributes;
+    const attributes = nft.metadata?.attributes;
     const boost = attributes.filter((item) => item.display_type === "Booster");
     return boost[0].value;
   };
 
   const getAttributesLevel = (nft) => {
-    const attributes = nft.metadata.attributes;
+    const attributes = nft.metadata?.attributes;
     const boost = attributes.filter((item) => item.trait_type === "Level");
     return boost[0].value;
   };
@@ -99,31 +99,31 @@ const BuyNftModal = ({ nftToBuy, setVisibility, visible }) => {
         </div>
 
         <div style={styles.transparentContainer}>
-          {nftToBuy?.collectionName !== null && (
-            <h3 style={{ textAlign: "center", fontSize: "21px" }}>{nftToBuy?.collectionName}</h3>
+          {nftToBuy && (
+            <>
+              <h3 style={{ textAlign: "center", fontSize: "21px" }}>{nftToBuy?.collectionName}</h3>
+              <h4 style={{ textAlign: "center", fontSize: "14px" }}>{nftToBuy?.metadata.description}</h4>
+              <br></br>
+              <div>
+                Boost:
+                <div style={{ float: "right" }}>{getAttributesBoost(nftToBuy)} </div>
+              </div>
+              <div>
+                Level:
+                <div style={{ float: "right" }}>{getAttributesLevel(nftToBuy)} </div>
+              </div>
+              <div>
+                NFT Id: <div style={{ float: "right" }}>{nftToBuy?.tokenId} </div>
+              </div>
+              <div>
+                Address:
+                <div style={{ float: "right" }}>
+                  {getEllipsisTxt(nftToBuy?.token_address, 5)}{" "}
+                  <CopyOutlined style={{ color: "blue" }} onClick={() => copyToClipboard(nftToBuy?.token_address)} />
+                </div>
+              </div>
+            </>
           )}
-          {nftToBuy?.metadata !== null && (
-            <h4 style={{ textAlign: "center", fontSize: "14px" }}>{nftToBuy?.metadata.description}</h4>
-          )}
-          <br></br>
-          <div>
-            Boost:
-            <div style={{ float: "right" }}>{getAttributesBoost(nftToBuy)} </div>
-          </div>
-          <div>
-            Level:
-            <div style={{ float: "right" }}>{getAttributesLevel(nftToBuy)} </div>
-          </div>
-          <div>
-            NFT Id: <div style={{ float: "right" }}>{nftToBuy?.tokenId} </div>
-          </div>
-          <div>
-            Address:
-            <div style={{ float: "right" }}>
-              {getEllipsisTxt(nftToBuy?.token_address, 5)}{" "}
-              <CopyOutlined style={{ color: "blue" }} onClick={() => copyToClipboard(nftToBuy?.token_address)} />
-            </div>
-          </div>
         </div>
       </Spin>
     </Modal>

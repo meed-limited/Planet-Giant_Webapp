@@ -3,9 +3,11 @@ import { useMoralis } from "react-moralis";
 import AddressInput from "components/AddressInput";
 import { Modal, Spin, Input } from "antd";
 import { transferNft } from "helpers/contractCall/writeCall";
+import { useUserData } from "userContext/UserContextProvider";
 
 const TransferNftModal = ({ nftToTransfer, setVisibility, visible }) => {
   const { chainId } = useMoralis();
+  const { isMobile } = useUserData();
   const [receiverToSend, setReceiver] = useState(null);
   const [amountToSend, setAmount] = useState(null);
   const [isPending, setIsPending] = useState(false);
@@ -37,7 +39,7 @@ const TransferNftModal = ({ nftToTransfer, setVisibility, visible }) => {
       confirmLoading={isPending}
       okText="Send"
       bodyStyle={{
-        width: "500px",
+        width: isMobile ? "350px" : "500px",
       }}
     >
       <Spin spinning={isPending} size="large">
