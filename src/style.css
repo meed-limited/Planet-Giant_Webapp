@@ -66,9 +66,6 @@ s .ant-modal-title {
   font-size: 20px !important;
 }
 
-/* /* .ant-spin {
-  color: white !important;
-} */
 .ant-spin-dot {
   font-size: 60px;
 }
@@ -77,4 +74,8 @@ s .ant-modal-title {
   width: 30px;
   height: 30px;
   background-color: white;
+}
+
+.ant-spin-nested-loading > div > .ant-spin .ant-spin-dot {
+  margin: -30px;
 }

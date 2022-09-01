@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { useMoralis } from "react-moralis";
-import { IS_PRODUCTION, MARKETPLACE, TEST_MARKETPLACE } from "constant/constant";
+import { getMarketplaceAddress } from "constant/constant";
 import { approveNFTcontract, listOnMarketPlace } from "helpers/contractCall/writeCall";
 import { checkNftApproval } from "helpers/contractCall/readCall";
-import { getEllipsisTxt } from "helpers/formatters";
 import { useMoralisDb } from "hooks/useMoralisDb";
 import { Modal, Button, Spin, Input } from "antd";
 
@@ -12,7 +11,7 @@ const SellNftModal = ({ nftToSell, setVisibility, visible }) => {
   const { addItemImage, saveMarketItemInDB } = useMoralisDb();
   const [price, setPrice] = useState(0);
   const [loading, setLoading] = useState(false);
-  const marketAddress = IS_PRODUCTION ? MARKETPLACE : TEST_MARKETPLACE;
+  const marketAddress = getMarketplaceAddress();
 
   const list = async (nft, listPrice) => {
     setLoading(true);
@@ -21,11 +20,11 @@ const SellNftModal = ({ nftToSell, setVisibility, visible }) => {
       if (!approval) {
         await approveNFTcontract(nft.token_address, marketAddress);
       }
-      const isSuccess = await listOnMarketPlace(nft, listPrice, marketAddress);
-      if (isSuccess === true) {
+      const res = await listOnMarketPlace(nft, listPrice, marketAddress);
+      if (res.success === true) {
         setVisibility(false);
         addItemImage(nftToSell);
-        saveMarketItemInDB(nft, listPrice);
+        saveMarketItemInDB(nft, listPrice, res.data);
       }
     } catch (error) {
       console.log(error);
@@ -35,7 +34,7 @@ const SellNftModal = ({ nftToSell, setVisibility, visible }) => {
 
   return (
     <Modal
-      title={`List "${nftToSell?.name} #${getEllipsisTxt(nftToSell?.token_id, 6)}" For Sale`}
+      title={`List "${nftToSell?.name} #${nftToSell?.token_id}" For Sale`}
       visible={visible}
       onCancel={() => setVisibility(false)}
       onOk={() => list(nftToSell, price)}

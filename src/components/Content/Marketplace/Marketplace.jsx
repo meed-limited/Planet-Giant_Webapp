@@ -1,7 +1,7 @@
 /*eslint no-dupe-keys: "Off"*/
 import React, { useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
-import BuyNftModal from "./components/BuyNftModal";
+import BuyNftModal from "./BuyNftModal";
 import { useMoralisDb } from "hooks/useMoralisDb";
 import { getExplorer } from "helpers/networks";
 import { FALLBACK_IMG } from "constant/constant";
@@ -44,8 +44,6 @@ function Marketplace({ isSupportedChain }) {
     return;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  console.log(marketItems);
 
   return (
     <>

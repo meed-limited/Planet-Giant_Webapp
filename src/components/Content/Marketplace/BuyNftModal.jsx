@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMoralis } from "react-moralis";
 import { Moralis } from "moralis";
-import { TEST_MARKETPLACE } from "constant/constant";
+import { getMarketplaceAddress } from "constant/constant";
 import { buyNFT } from "helpers/contractCall/writeCall";
 import { Modal, Spin, Badge, Card } from "antd";
 
@@ -16,13 +16,12 @@ const styles = {
 const BuyNftModal = ({ nftToBuy, setVisibility, visible }) => {
   const { account } = useMoralis();
   const [loading, setLoading] = useState(false);
-
-  console.log(nftToBuy);
+  const marketAddress = getMarketplaceAddress();
 
   const purchase = async () => {
     setLoading(true);
     const tokenAdd = nftToBuy.token_address;
-    const res = await buyNFT(tokenAdd, TEST_MARKETPLACE, nftToBuy);
+    const res = await buyNFT(tokenAdd, marketAddress, nftToBuy);
 
     if (res) {
       updateSoldMarketItem();

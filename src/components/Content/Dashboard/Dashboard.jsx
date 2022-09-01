@@ -2,10 +2,7 @@ import { useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
 import { useUserData } from "userContext/UserContextProvider";
 import { Divider, Spin } from "antd";
-import Token from "./components/Tokens";
-import NFTs from "./components/NFTs";
-import TransferNftModal from "../Marketplace/components/TransferNftModal";
-import SellNftModal from "../Marketplace/components/SellNftModal";
+import { Token, NFTs, TransferNftModal, SellNftModal } from "./components";
 
 const styles = {
   content: {

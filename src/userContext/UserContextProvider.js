@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
 import { Moralis } from "moralis";
 import UserContext from "./context";
-import { IS_PRODUCTION, TEST_NFT, TEST_NFT_PERSO } from "constant/constant";
+import { getChain, getNftAddress, TEST_NFT } from "constant/constant";
 
 function UserDataProvider({ children }) {
   const { account, chainId, isInitialized, isWeb3Enabled } = useMoralis();
 
   const [userNFTs, setUserNFTs] = useState();
   const [balance, setBalance] = useState();
-  const chain = IS_PRODUCTION ? "0x19" : "0x152";
+  const chain = getChain();
+  const nftAddress = getNftAddress();
 
   const fetchNativeBalance = async () => {
     const options = {
@@ -24,7 +25,7 @@ function UserDataProvider({ children }) {
     const options = { chain: chain, address: account, token_address: TEST_NFT };
     const NFT1 = await Moralis.Web3API.account.getNFTsForContract(options);
 
-    const options2 = { chain: chain, address: account, token_address: TEST_NFT_PERSO };
+    const options2 = { chain: chain, address: account, token_address: nftAddress };
     const NFT2 = await Moralis.Web3API.account.getNFTsForContract(options2);
 
     const NFTs = { result: NFT1.result.concat(NFT2.result), total: NFT1.result.length + NFT2.result.length };

@@ -1,13 +1,8 @@
 import { Moralis } from "moralis";
-import { marketplace_ABI_Json } from "constant/abi";
+import { marketplace_ABI_Json, setApprovalForAll_ABI } from "constant/abi";
 import { getExplorer } from "../networks";
 import { openNotification } from "../notifications";
 import { FileSearchOutlined } from "@ant-design/icons";
-
-// import { IS_PRODUCTION, MARKETPLACE, NFT, TEST_MARKETPLACE, TEST_NFT } from "constant/constant";
-
-// const nftAddress = IS_PRODUCTION ? NFT : TEST_NFT;
-// const marketAddress = IS_PRODUCTION ? MARKETPLACE : TEST_MARKETPLACE;
 
 /* Allow a user to easily transfer an NFT:
  *****************************************/
@@ -58,18 +53,7 @@ export const approveNFTcontract = async (NFTaddress, contractAddress) => {
   const sendOptions = {
     contractAddress: NFTaddress,
     functionName: "setApprovalForAll",
-    abi: [
-      {
-        inputs: [
-          { internalType: "address", name: "operator", type: "address" },
-          { internalType: "bool", name: "_approved", type: "bool" },
-        ],
-        name: "setApprovalForAll",
-        outputs: [],
-        stateMutability: "nonpayable",
-        type: "function",
-      },
-    ],
+    abi: setApprovalForAll_ABI,
     params: {
       operator: contractAddress,
       _approved: true,
@@ -93,7 +77,7 @@ export const approveNFTcontract = async (NFTaddress, contractAddress) => {
 
 // List pack for sale on the MarketPlace
 export const listOnMarketPlace = async (nft, listPrice, contractAddress) => {
-  var isSuccess;
+  var response;
   const p = listPrice * ("1e" + 18);
   const sendOptions = {
     contractAddress: contractAddress,
@@ -107,29 +91,36 @@ export const listOnMarketPlace = async (nft, listPrice, contractAddress) => {
   };
 
   try {
-    const transaction = await Moralis.executeFunction(sendOptions);
-    await transaction.wait();
+    const tx = await Moralis.executeFunction(sendOptions);
+    const receipt = await tx.wait();
+    const itemId = filterEvents(receipt.events);
 
     let title = "NFTs listed succesfully";
     let msg = "Your NFT has been succesfully listed to the marketplace.";
     openNotification("success", title, msg);
     console.log("NFTs listed succesfully");
-    isSuccess = true;
+    response = { success: true, data: itemId };
   } catch (error) {
     let title = "Error during listing!";
     let msg = "Something went wrong while listing your NFT to the marketplace. Please try again.";
     openNotification("error", title, msg);
     console.log(error);
-    isSuccess = false;
+    response = { success: false };
   }
-  return isSuccess;
+  return response;
+};
+
+const filterEvents = (receipt) => {
+  const event = receipt.filter((ev) => ev.event === "MarketItemCreated");
+  const item = parseInt(event[0].args.itemId.toString());
+  return item;
 };
 
 // Buy NFT from the MarketPlace
-export const buyNFT = async (tokenAdd, marketAddress, tokenDetails) => {
+export const buyNFT = async (tokenAdd, marketAddress, nft) => {
   var isSuccess;
-  const itemID = tokenDetails.itemId;
-  const tokenPrice = tokenDetails.price;
+  const itemID = parseInt(nft.itemId);
+  const tokenPrice = parseInt(nft.price) * 10 ** 18;
 
   const sendOptions = {
     contractAddress: marketAddress,

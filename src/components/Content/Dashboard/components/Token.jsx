@@ -60,7 +60,7 @@ const Token = () => {
 
           <div style={{ marginLeft: "15px" }}>
             <a href="https://swap.crodex.app/#/swap" target="_blank" rel="noopener noreferrer">
-              <Button type="primary" shape="round" onClick={() => console.log("click")}>
+              <Button type="primary" shape="round">
                 Go
               </Button>
             </a>

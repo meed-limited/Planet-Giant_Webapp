@@ -30,7 +30,7 @@ export const useMoralisDb = () => {
     itemImage.save();
   };
 
-  const saveMarketItemInDB = async (nft, listPrice) => {
+  const saveMarketItemInDB = async (nft, listPrice, itemId) => {
     const CreatedMarketItem = Moralis.Object.extend("CreatedMarketItems");
     const item = new CreatedMarketItem();
 
@@ -46,6 +46,7 @@ export const useMoralisDb = () => {
     item.set("metadata", nft.metadata);
     item.set("collectionName", nft.name);
     item.set("owner", nft.owner_of);
+    item.set("itemId", itemId);
     item.set("symbol", nft.symbol);
     item.set("synced_at", nft.synced_at);
     item.set("token_address", nft.token_address);
