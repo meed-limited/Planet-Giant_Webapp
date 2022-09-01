@@ -34,6 +34,19 @@ const styles = {
     background: "black",
     color: "white",
   },
+  buttonModal: {
+    padding: "10px",
+    display: "flex",
+    justifyContent: "center",
+    fontWeight: "700",
+    fontSize: "20px",
+  },
+  bodyModal: {
+    width: "350px",
+    padding: "15px",
+    fontSize: "17px",
+    fontWeight: "500",
+  },
   text: {
     color: "#21BF96",
   },
@@ -90,27 +103,11 @@ function Account() {
           visible={isAuthModalVisible}
           footer={null}
           onCancel={() => setIsAuthModalVisible(false)}
-          bodyStyle={{
-            width: "350px",
-            margin: "auto",
-            padding: "15px",
-            fontSize: "17px",
-            fontWeight: "500",
-          }}
+          bodyStyle={{ ...styles.bodyModal, margin: "auto" }}
           style={{ fontSize: "16px", fontWeight: "500" }}
           width="340px"
         >
-          <div
-            style={{
-              padding: "10px",
-              display: "flex",
-              justifyContent: "center",
-              fontWeight: "700",
-              fontSize: "20px",
-            }}
-          >
-            Connect Wallet
-          </div>
+          <div style={styles.buttonModal}>Connect Wallet</div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
             {connectors.map(({ title, icon, connectorId }, key) => (
               <div
@@ -159,12 +156,7 @@ function Account() {
         visible={isModalVisible}
         footer={null}
         onCancel={() => setIsModalVisible(false)}
-        bodyStyle={{
-          width: "350px",
-          padding: "15px",
-          fontSize: "17px",
-          fontWeight: "500",
-        }}
+        bodyStyle={styles.bodyModal}
         style={{ fontSize: "16px", fontWeight: "500" }}
         width="400px"
       >
