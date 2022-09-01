@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
-export const IS_PRODUCTION = process.env.NODE_ENV === "production" ? true : false;
+// export const IS_PRODUCTION = process.env.NODE_ENV === "production" ? true : false;
+export const IS_PRODUCTION = false;
 
 /* CONTRACT ADDRESSES:
  **********************/
