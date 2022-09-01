@@ -45,6 +45,8 @@ function Marketplace({ isSupportedChain }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  console.log(marketItems);
+
   return (
     <>
       {isAuthenticated && isSupportedChain && (

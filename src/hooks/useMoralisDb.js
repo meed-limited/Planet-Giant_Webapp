@@ -6,6 +6,7 @@ export const useMoralisDb = () => {
   const getMarketItemData = async () => {
     const CreatedMarketItems = Moralis.Object.extend("CreatedMarketItems");
     const query = new Moralis.Query(CreatedMarketItems);
+    query.equalTo("sold", false);
     const res = await query.find();
     return res;
   };
