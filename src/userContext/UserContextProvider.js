@@ -2,15 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
 import { Moralis } from "moralis";
 import UserContext from "./context";
+import { useWindowWidthAndHeight } from "hooks/useWindowWidthAndHeight";
 import { getChain, getNftAddress, TEST_NFT } from "constant/constant";
 
 function UserDataProvider({ children }) {
   const { account, chainId, isInitialized, isWeb3Enabled } = useMoralis();
-
+  const [width] = useWindowWidthAndHeight();
   const [userNFTs, setUserNFTs] = useState();
   const [balance, setBalance] = useState();
   const chain = getChain();
   const nftAddress = getNftAddress();
+
+  const isMobile = width <= 768;
 
   const fetchNativeBalance = async () => {
     const options = {
@@ -50,6 +53,7 @@ function UserDataProvider({ children }) {
         setBalance,
         userNFTs,
         setUserNFTs,
+        isMobile,
       }}
     >
       {children}

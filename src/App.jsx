@@ -7,13 +7,13 @@ import { ChainVerification } from "./components/Chains";
 import CustomHeader from "components/Header/CustomHeader";
 import Dashboard from "components/Content/Dashboard/Dashboard";
 import Marketplace from "components/Content/Marketplace/Marketplace";
-// import { useWindowWidthAndHeight } from "./hooks/useWindowWidthAndHeight";
 import { Layout } from "antd";
 import background from "./assets/background.jpg";
 
 import "antd/dist/antd.css";
 import "./style.css";
 import { IS_PRODUCTION } from "constant/constant";
+import { useUserData } from "userContext/UserContextProvider";
 
 const { Footer } = Layout;
 
@@ -59,6 +59,8 @@ const styles = {
     position: "fixed",
     textAlign: "center",
     width: "100%",
+    minWidth: "350px",
+    height: "65px",
     bottom: "0",
     fontWeight: "800",
     backgroundColor: "transparent",
@@ -67,10 +69,8 @@ const styles = {
 };
 const App = () => {
   const { account, chainId, isWeb3Enabled, enableWeb3, isAuthenticated, isWeb3EnableLoading } = useMoralis();
-  // const [width] = useWindowWidthAndHeight();
+  const { isMobile } = useUserData();
   const [isSupportedChain, setIsSupportedChain] = useState();
-
-  // const isMobile = width <= 768;
 
   useEffect(() => {
     if (chainId) {
@@ -97,7 +97,7 @@ const App = () => {
           {chainId && !isSupportedChain && <ChainVerification />}
           <CustomHeader />
 
-          <div style={styles.content}>
+          <div style={{ ...styles.content, maxHeight: isMobile ? "525px" : "" }}>
             <AccountVerification />
 
             {isAuthenticated && account && isSupportedChain && (

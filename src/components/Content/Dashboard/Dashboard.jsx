@@ -26,7 +26,7 @@ const styles = {
     border: "solid #75e287 1px",
     borderRadius: "7px",
     gap: "5px",
-    padding: "15px 30px",
+    paddingBlock: "15px",
     boxShadow: "rgba(0, 0, 0, 0.35) 0px 3px 10px",
     fontSize: "17px",
   },

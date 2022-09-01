@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useMoralis } from "react-moralis";
+import { useUserData } from "userContext/UserContextProvider";
 import Blockie from "../Blockie";
 import Address from "../Address/Address";
 import { connectors } from "./config";
@@ -23,12 +24,12 @@ const styles = {
   },
   button: {
     height: "40px",
-    padding: "0 20px",
+    paddingInline: "20px",
     textAlign: "center",
     fontWeight: "600",
     letterSpacing: "0.5px",
     fontSize: "15px",
-    margin: "20px 20px",
+    marginBlock: "20px",
     border: "none",
     background: "black",
     color: "white",
@@ -58,6 +59,7 @@ const styles = {
 
 function Account() {
   const { authenticate, isAuthenticated, account, chainId, logout } = useMoralis();
+  const { isMobile } = useUserData();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isAuthModalVisible, setIsAuthModalVisible] = useState(false);
 
@@ -76,7 +78,12 @@ function Account() {
   if (!isAuthenticated || !account) {
     return (
       <>
-        <Button shape="round" type="primary" style={styles.button} onClick={() => setIsAuthModalVisible(true)}>
+        <Button
+          shape="round"
+          type="primary"
+          style={{ ...styles.button, marginInline: isMobile ? "0px" : "20px" }}
+          onClick={() => setIsAuthModalVisible(true)}
+        >
           Connect Wallet
         </Button>
         <Modal
@@ -138,16 +145,22 @@ function Account() {
 
   return (
     <>
-      <div style={styles.account} onClick={() => setIsModalVisible(true)}>
-        <p style={{ marginRight: "5px", ...styles.text }}>{getEllipsisTxt(account, 6)}</p>
-        <Blockie currentWallet scale={3} />
-      </div>
+      {!isMobile ? (
+        <div style={styles.account} onClick={() => setIsModalVisible(true)}>
+          <p style={{ marginRight: "5px", ...styles.text }}>{getEllipsisTxt(account, 6)}</p>
+          <Blockie currentWallet scale={3} />
+        </div>
+      ) : (
+        <div style={{ paddingTop: "30px" }} onClick={() => setIsModalVisible(true)}>
+          <Blockie currentWallet scale={5} />
+        </div>
+      )}
       <Modal
         visible={isModalVisible}
         footer={null}
         onCancel={() => setIsModalVisible(false)}
         bodyStyle={{
-          width: "400px",
+          width: "350px",
           padding: "15px",
           fontSize: "17px",
           fontWeight: "500",
