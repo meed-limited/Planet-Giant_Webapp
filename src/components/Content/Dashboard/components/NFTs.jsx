@@ -36,7 +36,8 @@ const NFTs = ({ userNFTs, action1, action2, chainId, isSelection, setSelectedNFT
     if (metaJSON !== null) {
       for (let i = 0; i < metaJSON.attributes.length; i++) {
         if (metaJSON.attributes[i].display_type && metaJSON.attributes[i].display_type === "Booster") {
-          return `${metaJSON.attributes[i].trait_type}:  +${parseInt(metaJSON.attributes[i].value)}`;
+          const type = metaJSON.attributes[i].trait_type === "Time" ? "s" : "%";
+          return `${metaJSON.attributes[i].trait_type}:  +${parseInt(metaJSON.attributes[i].value)}${type}`;
         }
       }
     } else return;
@@ -64,6 +65,13 @@ const NFTs = ({ userNFTs, action1, action2, chainId, isSelection, setSelectedNFT
     } else return;
   };
 
+  const getLevelForTitle = (nft) => {
+    const level = getLevelAttributes(nft);
+    if (level === "1") return "I";
+    if (level === "2") return "II";
+    if (level === "3") return "III";
+  };
+
   return (
     <>
       <div style={styles.NFTs}>
@@ -80,9 +88,11 @@ const NFTs = ({ userNFTs, action1, action2, chainId, isSelection, setSelectedNFT
                 nft.name = nft.metadata?.name;
               }
 
+              let titleLevel = getLevelForTitle(nft);
+
               let attributes = (
                 <div>
-                  <span>{getBoostAttributes(nft)}%</span>
+                  <span>{getBoostAttributes(nft)}</span>
                   <br></br>
                   <span>Serie: {getSerieAttributes(nft)}</span>
                   <br></br>
@@ -128,7 +138,7 @@ const NFTs = ({ userNFTs, action1, action2, chainId, isSelection, setSelectedNFT
                   }
                   key={index}
                 >
-                  <Meta title={nft.name} description={attributes} />
+                  <Meta title={`${nft.name} ${titleLevel}`} description={attributes} />
                 </Card>
               );
             })}

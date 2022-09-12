@@ -4,7 +4,21 @@ import { getMarketplaceAddress } from "constant/constant";
 import { approveNFTcontract, listOnMarketPlace } from "helpers/contractCall/writeCall";
 import { checkNftApproval } from "helpers/contractCall/readCall";
 import { useMoralisDb } from "hooks/useMoralisDb";
-import { Modal, Button, Spin, Input } from "antd";
+import { Modal, Button, Spin, Input, Card } from "antd";
+
+const styles = {
+  card: {
+    width: "190px",
+    border: "2px solid #e7eaf3",
+    margin: "auto",
+    marginBottom: "15px",
+  },
+  NftImage: {
+    width: "250px",
+    height: "190px",
+    margin: "auto",
+  },
+};
 
 const SellNftModal = ({ nftToSell, setVisibility, visible }) => {
   const { account } = useMoralis();
@@ -34,6 +48,7 @@ const SellNftModal = ({ nftToSell, setVisibility, visible }) => {
 
   return (
     <Modal
+      key={nftToSell?.token_id}
       title={`List "${nftToSell?.name} #${nftToSell?.token_id}" For Sale`}
       visible={visible}
       onCancel={() => setVisibility(false)}
@@ -47,17 +62,12 @@ const SellNftModal = ({ nftToSell, setVisibility, visible }) => {
       ]}
     >
       <Spin spinning={loading}>
-        <img
-          src={`${nftToSell?.image}`}
-          alt=""
-          style={{
-            width: "250px",
-            height: "250px",
-            margin: "auto",
-            borderRadius: "10px",
-            marginBottom: "15px",
-          }}
-        />
+        <Card
+          size="small"
+          style={styles.card}
+          cover={<img src={nftToSell?.image} alt="" style={styles.NftImage} />}
+          key={nftToSell?.token_id}
+        ></Card>
         <label style={{ color: "white" }}>Set the price in CRO:</label>
         <Input autoFocus onChange={(e) => setPrice(e.target.value)} />
       </Spin>
