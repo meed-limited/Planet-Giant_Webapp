@@ -7,6 +7,7 @@ import { getExplorer } from "helpers/networks";
 import { FALLBACK_IMG } from "constant/constant";
 import { Card, Image, Tooltip, Badge } from "antd";
 import { FileSearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import { getLevelForTitle } from "helpers/getNftAttributes";
 const { Meta } = Card;
 
 const styles = {
@@ -53,6 +54,7 @@ function Marketplace({ isSupportedChain }) {
             {marketItems &&
               marketItems.length > 0 &&
               marketItems.slice(0, 50).map((nft, index) => {
+                let titleLevel = getLevelForTitle(nft);
                 return (
                   <Card
                     hoverable
@@ -83,7 +85,8 @@ function Marketplace({ isSupportedChain }) {
                     }
                     key={index}
                   >
-                    <Meta title={nft.name} description={`#${nft.tokenId}`} />
+                    <Meta title={`${nft.metadata.name} ${titleLevel}`} />
+                    <Meta description={`#${nft.tokenId}`} />
                   </Card>
                 );
               })}

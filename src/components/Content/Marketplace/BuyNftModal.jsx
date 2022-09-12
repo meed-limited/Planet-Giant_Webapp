@@ -7,6 +7,7 @@ import copy from "copy-to-clipboard";
 import { Modal, Spin, Badge, Card, message } from "antd";
 import { getEllipsisTxt } from "helpers/formatters";
 import { CopyOutlined } from "@ant-design/icons";
+import { getBoostAttributes, getLevelAttributes, getLevelForTitle, getTypeAttributes } from "helpers/getNftAttributes";
 
 const styles = {
   NftImage: {
@@ -63,21 +64,11 @@ const BuyNftModal = ({ nftToBuy, setVisibility, visible }) => {
     });
   };
 
-  const getAttributesBoost = (nft) => {
-    const attributes = nft.metadata?.attributes;
-    const boost = attributes.filter((item) => item.display_type === "Booster");
-    return boost[0].value;
-  };
-
-  const getAttributesLevel = (nft) => {
-    const attributes = nft.metadata?.attributes;
-    const boost = attributes.filter((item) => item.trait_type === "Level");
-    return boost[0].value;
-  };
+  const titleLevel = nftToBuy != null ? getLevelForTitle(nftToBuy) : "";
 
   return (
     <Modal
-      title={`Buy "${nftToBuy?.collectionName}" #${nftToBuy?.tokenId} ?`}
+      title={`Buy "${nftToBuy?.collectionName} ${titleLevel}" #${nftToBuy?.tokenId} ?`}
       visible={visible}
       onCancel={() => setVisibility(false)}
       onOk={() => purchase()}
@@ -89,28 +80,31 @@ const BuyNftModal = ({ nftToBuy, setVisibility, visible }) => {
             size="small"
             style={{ width: "190px", border: "2px solid #e7eaf3" }}
             cover={
-              <>
-                <Badge.Ribbon color="green" text={`${nftToBuy?.price} CRO`}>
-                  <img src={nftToBuy?.image} alt="" style={styles.NftImage} />
-                </Badge.Ribbon>
-              </>
+              <Badge.Ribbon color="green" text={`${nftToBuy?.price} CRO`}>
+                <img src={nftToBuy?.image} alt="" style={styles.NftImage} />
+              </Badge.Ribbon>
             }
-          ></Card>
+          />
         </div>
 
         <div style={styles.transparentContainer}>
           {nftToBuy && (
             <>
-              <h3 style={{ textAlign: "center", fontSize: "21px" }}>{nftToBuy?.collectionName}</h3>
+              <h3 style={{ textAlign: "center", fontSize: "21px" }}>
+                {nftToBuy?.collectionName} {getLevelForTitle(nftToBuy)}
+              </h3>
               <h4 style={{ textAlign: "center", fontSize: "14px" }}>{nftToBuy?.metadata.description}</h4>
               <br></br>
               <div>
                 Boost:
-                <div style={{ float: "right" }}>{getAttributesBoost(nftToBuy)} </div>
+                <div style={{ float: "right" }}>
+                  {getBoostAttributes(nftToBuy)}
+                  {getTypeAttributes(nftToBuy)}{" "}
+                </div>
               </div>
               <div>
                 Level:
-                <div style={{ float: "right" }}>{getAttributesLevel(nftToBuy)} </div>
+                <div style={{ float: "right" }}>{getLevelAttributes(nftToBuy)} </div>
               </div>
               <div>
                 NFT Id: <div style={{ float: "right" }}>{nftToBuy?.tokenId} </div>
