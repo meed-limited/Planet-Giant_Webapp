@@ -76,13 +76,13 @@ const Dashboard = () => {
       ) : (
         <>
           <div style={styles.box}>
-            <div style={styles.title}>Planet Giants Tokens:</div>
+            <div style={styles.title}>Planet Giant - Tokens:</div>
             <Divider />
             <Token />
           </div>
 
           <div style={styles.box}>
-            <div style={styles.title}>Planet Giants NFTs:</div>
+            <div style={styles.title}>Planet Giant - NFTs:</div>
             <Divider />
 
             <NFTs

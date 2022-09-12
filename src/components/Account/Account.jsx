@@ -120,7 +120,7 @@ function Account() {
                     }
                     await authenticate({
                       provider: connectorId,
-                      signingMessage: "Welcome to Planet Giants!",
+                      signingMessage: "Welcome to Planet Giant!",
                     });
                     window.localStorage.setItem("connectorId", connectorId);
 
