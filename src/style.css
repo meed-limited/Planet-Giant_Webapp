@@ -55,7 +55,8 @@
   background-position: top;
   background-size: cover;
   background-repeat: no-repeat;
-  width: auto;
+  width: 420px;
+  min-width: 340px;
   border-radius: 1rem;
 }
 

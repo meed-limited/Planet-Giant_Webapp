@@ -80,7 +80,7 @@ const BuyNftModal = ({ nftToBuy, setVisibility, visible }) => {
       okText="Buy"
     >
       <Spin spinning={loading}>
-        <div style={{ width: "250px", display: "flex", justifyContent: "center" }}>
+        <div style={{ display: "flex", justifyContent: "center" }}>
           <Card
             size="small"
             style={{ width: "190px", border: "2px solid #e7eaf3" }}

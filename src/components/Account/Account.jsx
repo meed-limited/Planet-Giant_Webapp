@@ -42,7 +42,8 @@ const styles = {
     fontSize: "20px",
   },
   bodyModal: {
-    width: "350px",
+    width: "95%",
+    margin: "auto",
     padding: "15px",
     fontSize: "17px",
     fontWeight: "500",
