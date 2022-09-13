@@ -1,7 +1,15 @@
 {
-  "name": "planet-giants",
+  "name": "planet-giant",
   "version": "0.1.0",
   "author": "Pedrojok01",
+  "scripts": {
+    "start": "set \"GENERATE_SOURCEMAP=false\" && react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject",
+    "lint": "eslint --fix",
+    "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,css,md,json,html}\" .prettierrc --config ./.prettierrc"
+  },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@walletconnect/web3-provider": "^1.7.8",
@@ -27,16 +35,14 @@
     "url": "^0.11.0",
     "yarn": "^1.22.19"
   },
-  "scripts": {
-    "start": "set \"GENERATE_SOURCEMAP=false\" && react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject",
-    "devchain": "node Truffle/scripts/devChain.js",
-    "connect": "moralis-admin-cli connect-local-devchain",
-    "lint": "eslint --fix",
-    "prettier": "prettier --write \"**/*.{sol,js,jsx,ts,tsx,css,md,json,html}\" .prettierrc --config ./.prettierrc",
-    "slither": "slither ./Truffle/contracts --truffle-build-directory ./Truffle --solc-remaps @openzeppelin=node_modules/@openzeppelin --exclude naming-convention,external-function,low-level-calls --buidler-ignore-compile"
+  "devDependencies": {
+    "@truffle/hdwallet-provider": "^2.0.14",
+    "dotenv": "^16.0.2",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.8",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^2.7.1"
   },
   "eslintConfig": {
     "extends": [
@@ -55,14 +61,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@truffle/hdwallet-provider": "^2.0.14",
-    "dotenv": "^16.0.2",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.30.1",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "prettier": "^2.7.1"
   }
 }
