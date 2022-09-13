@@ -71,7 +71,7 @@ function Marketplace({ isSupportedChain }) {
                     ]}
                     style={{ width: "190px", border: "2px solid #e7eaf3" }}
                     cover={
-                      <>
+                      <Badge.Ribbon text={`Buy now for ${nft.price} CRO`} color="green">
                         <Image
                           preview={false}
                           src={nft.image || "error"}
@@ -80,8 +80,7 @@ function Marketplace({ isSupportedChain }) {
                           style={{ height: "190px" }}
                           onClick={() => handleBuyClick(nft)}
                         />
-                        {nft && <Badge.Ribbon text="Buy Now" color="green"></Badge.Ribbon>}
-                      </>
+                      </Badge.Ribbon>
                     }
                     key={index}
                   >
