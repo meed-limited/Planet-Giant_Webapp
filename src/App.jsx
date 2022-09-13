@@ -4,16 +4,16 @@ import { Navigate } from "react-router";
 import { useMoralis } from "react-moralis";
 import { AccountVerification } from "./components/Account";
 import { ChainVerification } from "./components/Chains";
-import CustomHeader from "components/Header/CustomHeader";
-import Dashboard from "components/Content/Dashboard/Dashboard";
-import Marketplace from "components/Content/Marketplace/Marketplace";
-import { Layout } from "antd";
+import CustomHeader from "./components/Header/CustomHeader";
+import Dashboard from "./components/Content/Dashboard/Dashboard";
+import Marketplace from "./components/Content/Marketplace/Marketplace";
 import background from "./assets/background.jpg";
-
-import "antd/dist/antd.css";
 import "./style.css";
-import { IS_PRODUCTION } from "constant/constant";
-import { useUserData } from "userContext/UserContextProvider";
+import { Layout } from "antd";
+import "antd/dist/antd.css";
+
+import { IS_PRODUCTION } from "./constant/constant";
+import { useUserData } from "./userContext/UserContextProvider";
 
 const { Footer } = Layout;
 

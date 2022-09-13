@@ -1,5 +1,5 @@
 import { Button } from "antd";
-import { IS_PRODUCTION } from "constant/constant";
+import { IS_PRODUCTION } from "../../constant/constant";
 
 const styles = {
   wrongChainBar: {

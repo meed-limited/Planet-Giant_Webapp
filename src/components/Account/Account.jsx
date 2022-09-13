@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useMoralis } from "react-moralis";
-import { useUserData } from "userContext/UserContextProvider";
+import { useUserData } from "../../userContext/UserContextProvider";
 import Blockie from "../Blockie";
 import Address from "../Address/Address";
 import { connectors } from "./config";
-import { getExplorer } from "helpers/networks";
-import { getEllipsisTxt } from "helpers/formatters";
+import { getExplorer } from "../../helpers/networks";
+import { getEllipsisTxt } from "../../helpers/formatters";
 import { Button, Card, Modal } from "antd";
 import { SelectOutlined } from "@ant-design/icons";
 import Text from "antd/lib/typography/Text";

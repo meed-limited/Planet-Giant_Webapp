@@ -1,6 +1,6 @@
-import { checkApprovalABI, getSymbolABI } from "constant/abi";
-import { getMarketplaceAddress, getNftAddress } from "constant/constant";
-import { Moralis } from "moralis";
+import { Moralis } from "moralis-v1";
+import { checkApprovalABI, getSymbolABI } from "../../constant/abi";
+import { getMarketplaceAddress, getNftAddress } from "../../constant/constant";
 
 const nftAddress = getNftAddress();
 const marketAddress = getMarketplaceAddress();

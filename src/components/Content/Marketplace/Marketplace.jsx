@@ -2,12 +2,12 @@
 import React, { useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
 import BuyNftModal from "./BuyNftModal";
-import { useMoralisDb } from "hooks/useMoralisDb";
-import { getExplorer } from "helpers/networks";
-import { FALLBACK_IMG } from "constant/constant";
+import { FALLBACK_IMG } from "../../../constant/constant";
+import { useMoralisDb } from "../../../hooks/useMoralisDb";
+import { getExplorer } from "../../../helpers/networks";
+import { getLevelForTitle } from "../../../helpers/getNftAttributes";
 import { Card, Image, Tooltip, Badge } from "antd";
 import { FileSearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import { getLevelForTitle } from "helpers/getNftAttributes";
 const { Meta } = Card;
 
 const styles = {

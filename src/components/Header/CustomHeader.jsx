@@ -1,5 +1,5 @@
 import { Header } from "antd/lib/layout/layout";
-import { Account } from "components/Account";
+import { Account } from "../Account";
 import logo from "../../assets/logo.png";
 import MenuItems from "./MenuItems";
 

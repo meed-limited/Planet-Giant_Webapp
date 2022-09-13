@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
-import { Moralis } from "moralis";
+import { Moralis } from "moralis-v1";
 import UserContext from "./context";
-import { useWindowWidthAndHeight } from "hooks/useWindowWidthAndHeight";
-import { getChain, getNftAddress, TEST_NFT } from "constant/constant";
+import { useWindowWidthAndHeight } from "../hooks/useWindowWidthAndHeight";
+import { getChain, getNftAddress, TEST_NFT } from "../constant/constant";
 
 function UserDataProvider({ children }) {
   const { account, chainId, isInitialized, isWeb3Enabled } = useMoralis();

@@ -1,15 +1,15 @@
-import { getExplorer } from "helpers/networks";
-import { useIPFS } from "hooks/useIPFS";
-import { useVerifyMetadata } from "hooks/useVerifyMetadata";
-import { Card, Image, Tooltip, Skeleton, Alert } from "antd";
-import { FileSearchOutlined, SendOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import { getExplorer } from "../../../../helpers/networks";
+import { useIPFS } from "../../../../hooks/useIPFS";
+import { useVerifyMetadata } from "../../../../hooks/useVerifyMetadata";
 import {
   getBoostAttributes,
   getLevelAttributes,
   getLevelForTitle,
   getSerieAttributes,
   getTypeAttributes,
-} from "helpers/getNftAttributes";
+} from "../../../../helpers/getNftAttributes";
+import { Card, Image, Tooltip, Skeleton, Alert } from "antd";
+import { FileSearchOutlined, SendOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 const { Meta } = Card;
 
 const styles = {

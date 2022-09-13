@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { useMoralis } from "react-moralis";
-import { Moralis } from "moralis";
-import { getMarketplaceAddress } from "constant/constant";
-import { buyNFT } from "helpers/contractCall/writeCall";
-import copy from "copy-to-clipboard";
+import { Moralis } from "moralis-v1";
+import { getMarketplaceAddress } from "../../../constant/constant";
+import { buyNFT } from "../../../helpers/contractCall/writeCall";
+import { getEllipsisTxt } from "../../../helpers/formatters";
+import {
+  getBoostAttributes,
+  getLevelAttributes,
+  getLevelForTitle,
+  getTypeAttributes,
+} from "../../../helpers/getNftAttributes";
 import { Modal, Spin, Badge, Card, message } from "antd";
-import { getEllipsisTxt } from "helpers/formatters";
+import copy from "copy-to-clipboard";
 import { CopyOutlined } from "@ant-design/icons";
-import { getBoostAttributes, getLevelAttributes, getLevelForTitle, getTypeAttributes } from "helpers/getNftAttributes";
 
 const styles = {
   NftImage: {
@@ -15,7 +20,7 @@ const styles = {
     borderRadius: "10px",
     marginBottom: "15px",
   },
-  transparentContainer: {
+  whiteContainer: {
     marginTop: "10px",
     borderRadius: "20px",
     background: "white",
@@ -87,7 +92,7 @@ const BuyNftModal = ({ nftToBuy, setVisibility, visible }) => {
           />
         </div>
 
-        <div style={styles.transparentContainer}>
+        <div style={styles.whiteContainer}>
           {nftToBuy && (
             <>
               <h3 style={{ textAlign: "center", fontSize: "21px" }}>

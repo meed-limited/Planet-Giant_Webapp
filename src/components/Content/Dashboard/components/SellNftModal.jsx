@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useMoralis } from "react-moralis";
-import { getMarketplaceAddress } from "constant/constant";
-import { approveNFTcontract, listOnMarketPlace } from "helpers/contractCall/writeCall";
-import { checkNftApproval } from "helpers/contractCall/readCall";
-import { useMoralisDb } from "hooks/useMoralisDb";
+import { getMarketplaceAddress } from "../../../../constant/constant";
+import { approveNFTcontract, listOnMarketPlace } from "../../../../helpers/contractCall/writeCall";
+import { checkNftApproval } from "../../../../helpers/contractCall/readCall";
+import { useMoralisDb } from "../../../../hooks/useMoralisDb";
 import { Modal, Button, Spin, Input, Card } from "antd";
 
 const styles = {
@@ -49,7 +49,7 @@ const SellNftModal = ({ nftToSell, setVisibility, visible }) => {
   return (
     <Modal
       key={nftToSell?.token_id}
-      title={`List "${nftToSell?.name} #${nftToSell?.token_id}" For Sale`}
+      title={`List "${nftToSell?.name} #${nftToSell?.token_id}" For Sale?`}
       visible={visible}
       onCancel={() => setVisibility(false)}
       onOk={() => list(nftToSell, price)}

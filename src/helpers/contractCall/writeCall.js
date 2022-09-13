@@ -1,5 +1,5 @@
-import { Moralis } from "moralis";
-import { marketplace_ABI_Json, setApprovalForAll_ABI } from "constant/abi";
+import { Moralis } from "moralis-v1";
+import { marketplace_ABI_Json, setApprovalForAll_ABI } from "../../constant/abi";
 import { getExplorer } from "../networks";
 import { openNotification } from "../notifications";
 import { FileSearchOutlined } from "@ant-design/icons";

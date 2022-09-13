@@ -1,7 +1,7 @@
 import { Button } from "antd";
-import { CRO_TOKEN } from "constant/constant";
-import { useCoingeckoAPI } from "hooks/useCoingeckoAPI";
-import { useUserData } from "userContext/UserContextProvider";
+import { CRO_TOKEN } from "../../../../constant/constant";
+import { useCoingeckoAPI } from "../../../../hooks/useCoingeckoAPI";
+import { useUserData } from "../../../../userContext/UserContextProvider";
 import cronos_logo_big from "../../../../assets/cronos_logo_big.png";
 
 const styles = {

@@ -1,4 +1,4 @@
-import { IS_PRODUCTION } from "constant/constant";
+import { IS_PRODUCTION } from "../constant/constant";
 
 export const networkConfigs = {
   "0x1": {

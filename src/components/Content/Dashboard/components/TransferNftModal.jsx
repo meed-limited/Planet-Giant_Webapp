@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useMoralis } from "react-moralis";
-import AddressInput from "components/AddressInput";
+import { useUserData } from "../../../../userContext/UserContextProvider";
+import AddressInput from "../../../AddressInput";
+import { transferNft } from "../../../../helpers/contractCall/writeCall";
 import { Modal, Spin, Input } from "antd";
-import { transferNft } from "helpers/contractCall/writeCall";
-import { useUserData } from "userContext/UserContextProvider";
 
 const TransferNftModal = ({ nftToTransfer, setVisibility, visible }) => {
   const { chainId } = useMoralis();
