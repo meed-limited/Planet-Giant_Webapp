@@ -1,4 +1,4 @@
-import { ReactElement, SetStateAction, useState } from "react";
+import React, { ReactElement, SetStateAction, useState } from "react";
 import { useMoralis } from "react-moralis";
 import { getMarketplaceAddress } from "../../../../constant/constant";
 import { approveNFTcontract, listOnMarketPlace } from "../../../../helpers/contractCall/writeCall";
@@ -21,12 +21,19 @@ const styles = {
   },
 } as const;
 
-const SellNftModal: React.FC<any> = ({ nftToSell, setVisibility, visible }): ReactElement => {
+interface Props {
+  nftToSell: NFTinDB | null;
+  setVisibility: React.Dispatch<React.SetStateAction<boolean>>;
+  visible: boolean;
+}
+
+const SellNftModal: React.FC<Props> = ({ nftToSell, setVisibility, visible }): ReactElement => {
   const { account } = useMoralis();
   const { addItemImage, saveMarketItemInDB } = useMoralisDb();
   const [price, setPrice] = useState(0);
   const [loading, setLoading] = useState(false);
   const marketAddress = getMarketplaceAddress();
+  let index = 0;
 
   const list = async (nft: NFTinDB, listPrice: number) => {
     setLoading(true);
@@ -40,7 +47,9 @@ const SellNftModal: React.FC<any> = ({ nftToSell, setVisibility, visible }): Rea
         const res = await listOnMarketPlace(nft, listPrice, marketAddress);
         if (res.success === true) {
           setVisibility(false);
-          addItemImage(nftToSell);
+          if (nftToSell) {
+            addItemImage(nftToSell);
+          }
           saveMarketItemInDB(nft, listPrice, res.data);
         }
       }
@@ -54,15 +63,17 @@ const SellNftModal: React.FC<any> = ({ nftToSell, setVisibility, visible }): Rea
 
   return (
     <Modal
-      key={nftToSell?.token_id}
+      key={index++}
       title={`List ${nftToSell?.name} ${titleLevel} #${nftToSell?.token_id} For Sale?`}
       visible={visible}
       onCancel={() => setVisibility(false)}
-      onOk={() => list(nftToSell, price)}
+      onOk={() => list(nftToSell!, price)}
       okText="List"
       footer={[
-        <Button onClick={() => setVisibility(false)}>Cancel</Button>,
-        <Button onClick={() => list(nftToSell, price)} type="primary">
+        <Button onClick={() => setVisibility(false)} key={index++}>
+          Cancel
+        </Button>,
+        <Button onClick={() => list(nftToSell!, price)} type="primary" key={index++}>
           Sell
         </Button>,
       ]}

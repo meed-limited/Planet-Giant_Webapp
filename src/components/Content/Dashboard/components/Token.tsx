@@ -1,8 +1,9 @@
-import { Button } from "antd";
+import React from "react";
 import { CRO_TOKEN } from "../../../../constant/constant";
 import { useCoingeckoAPI } from "../../../../hooks/useCoingeckoAPI";
 import { useUserData } from "../../../../userContext/UserContextProvider";
 import cronos_logo_big from "../../../../assets/cronos_logo_big.png";
+import { Button } from "antd";
 
 const styles = {
   box: {

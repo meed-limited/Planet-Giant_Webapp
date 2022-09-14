@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
 import Blockie from "../Blockie";
 import { getEllipsisTxt } from "../../helpers/formatters";

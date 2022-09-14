@@ -1,7 +1,8 @@
-import { Header } from "antd/lib/layout/layout";
+import React from "react";
+import MenuItems from "./MenuItems";
 import { Account } from "../Account";
 import logo from "../../assets/logo.png";
-import MenuItems from "./MenuItems";
+import { Header } from "antd/lib/layout/layout";
 
 const styles = {
   header: {
@@ -24,7 +25,7 @@ const styles = {
   },
 } as const;
 
-const CustomHeader = () => {
+const CustomHeader: React.FC = () => {
   return (
     <Header style={styles.header}>
       <Logo />

@@ -4,25 +4,25 @@ interface Attributes {
   value: string;
 }
 
-export const getSerieAttributes = (nft: { metadata: { attributes: any } }) => {
+export const getSerieAttributes = (nft: NFTinDB) => {
   const attributes = nft.metadata?.attributes;
   const serie = attributes.filter((item: Attributes) => item.trait_type === "Series");
   return serie[0].value;
 };
 
-export const getBoostAttributes = (nft: { metadata: { attributes: any } }) => {
+export const getBoostAttributes = (nft: NFTinDB) => {
   const attributes = nft.metadata?.attributes;
   const boost = attributes.filter((item: Attributes) => item.display_type === "Booster");
   return boost[0].value;
 };
 
-export const getLevelAttributes = (nft: { metadata: { attributes: any } }) => {
+export const getLevelAttributes = (nft: NFTinDB) => {
   const attributes = nft.metadata?.attributes;
   const boost = attributes.filter((item: Attributes) => item.trait_type === "Level");
   return boost[0].value;
 };
 
-export const getTypeAttributes = (nft: { metadata: { attributes: any } }) => {
+export const getTypeAttributes = (nft: NFTinDB) => {
   const attributes = nft.metadata?.attributes;
   const type = attributes.filter(
     (item: { display_type: string; trait_type: string }) =>
@@ -31,7 +31,7 @@ export const getTypeAttributes = (nft: { metadata: { attributes: any } }) => {
   return type.length > 0 ? "s" : "%";
 };
 
-export const getLevelForTitle = (nft: any) => {
+export const getLevelForTitle = (nft: NFTinDB) => {
   const level = getLevelAttributes(nft);
   if (level === "2") return "II";
   if (level === "3") return "III";

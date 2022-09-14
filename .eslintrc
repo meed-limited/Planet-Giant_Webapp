@@ -18,17 +18,21 @@
     "prettier"
   ],
   "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier"
+    "prettier",
+    "plugin:prettier/recommended"
   ],
   "parserOptions": {
-    "ecmaVersion": 12
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
   "rules": {
     "no-console": "off", // Means warning
-    "no-explicit-any": ["off"]
-    //"prettier/prettier": 2 // Means error
+    // "@typescript-eslint/no-explicit-any": "off"
+    "prettier/prettier": "error"
   }
 }

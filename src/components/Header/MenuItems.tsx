@@ -1,4 +1,4 @@
-import { SetStateAction, useState } from "react";
+import React, { SetStateAction, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Menu } from "antd";
 import type { MenuProps } from "antd";
@@ -17,7 +17,7 @@ const styles = {
   },
 } as const;
 
-const MenuItems: React.FC<any> = () => {
+const MenuItems: React.FC = () => {
   const [current, setCurrent] = useState("/");
 
   const onClick = (e: { key: SetStateAction<string> }) => {

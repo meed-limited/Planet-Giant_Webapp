@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import React, { ReactElement } from "react";
 import { getExplorer } from "../../../../helpers/networks";
 import { useIPFS } from "../../../../hooks/useIPFS";
 import { useVerifyMetadata } from "../../../../hooks/useVerifyMetadata";
@@ -52,7 +52,7 @@ const NFTs: React.FC<any> = ({
       <Skeleton loading={!userNFTs?.result}>
         {userNFTs?.total === 0 && alertMessage}
         {userNFTs?.result &&
-          userNFTs.result.map((nft: any) => {
+          userNFTs.result.map((nft: any, index: number) => {
             nft = verifyMetadata(nft);
 
             if (!nft.image) {
@@ -84,15 +84,15 @@ const NFTs: React.FC<any> = ({
                 actions={
                   action1 && action2 && chainId
                     ? [
-                        <Tooltip title="View On Blockexplorer">
+                        <Tooltip title="View On Blockexplorer" key={index}>
                           <FileSearchOutlined
                             onClick={() => window.open(`${getExplorer(chainId)}address/${nft.token_address}`, "_blank")}
                           />
                         </Tooltip>,
-                        <Tooltip title="Transfer NFT">
+                        <Tooltip title="Transfer NFT" key={index}>
                           <SendOutlined onClick={() => action1(nft)} />
                         </Tooltip>,
-                        <Tooltip title="Sell On Marketplace">
+                        <Tooltip title="Sell On Marketplace" key={index}>
                           <ShoppingCartOutlined onClick={() => action2(nft)} />
                         </Tooltip>,
                       ]

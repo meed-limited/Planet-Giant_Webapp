@@ -1,3 +1,4 @@
+import React from "react";
 import { useMoralis } from "react-moralis";
 
 const styles = {
@@ -30,7 +31,7 @@ const styles = {
   },
 } as const;
 
-const AccountVerification = () => {
+const AccountVerification: React.FC = () => {
   const { isAuthenticated } = useMoralis();
 
   const message = "Connect your wallet";

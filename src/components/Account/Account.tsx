@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useMoralis } from "react-moralis";
 import { useUserData } from "../../userContext/UserContextProvider";
 import Blockie from "../Blockie";
@@ -77,7 +77,7 @@ declare global {
   }
 }
 
-function Account() {
+const Account: React.FC = () => {
   const { authenticate, isAuthenticated, account, chainId, logout } = useMoralis();
   const { isMobile } = useUserData();
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -204,6 +204,6 @@ function Account() {
       </Modal>
     </>
   );
-}
+};
 
 export default Account;

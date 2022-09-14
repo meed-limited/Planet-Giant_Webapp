@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
 import { useUserData } from "../../../userContext/UserContextProvider";
 import { Token, NFTs, TransferNftModal, SellNftModal } from "./components";
@@ -41,7 +41,7 @@ const styles = {
   },
 } as const;
 
-const Dashboard: React.FC<any> = () => {
+const Dashboard: React.FC = () => {
   const { chainId } = useMoralis();
   const { userNFTs } = useUserData();
   const [loading, setLoading] = useState(true);

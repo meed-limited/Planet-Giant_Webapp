@@ -1,3 +1,4 @@
+import React from "react";
 import { WarningOutlined } from "@ant-design/icons";
 
 const styles = {

@@ -1,5 +1,6 @@
-import { Button } from "antd";
+import React from "react";
 import { IS_PRODUCTION } from "../../constant/constant";
+import { Button } from "antd";
 
 const styles = {
   wrongChainBar: {
@@ -40,7 +41,7 @@ declare global {
   }
 }
 
-const ChainVerification = () => {
+const ChainVerification: React.FC = () => {
   const handleSwitch = async () => {
     try {
       await window.ethereum.request({

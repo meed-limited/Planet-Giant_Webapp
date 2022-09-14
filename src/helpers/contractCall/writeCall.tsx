@@ -1,3 +1,4 @@
+import React from "react";
 import { Moralis } from "moralis-v1";
 import { marketplace_ABI_Json, setApprovalForAll_ABI } from "../../constant/abi";
 import { getExplorer } from "../networks";
@@ -8,18 +9,19 @@ import { FileSearchOutlined } from "@ant-design/icons";
  *****************************************/
 export const transferNft = async (
   chainId: string | null,
-  nft: { contract_type: string; token_id: any; token_address: string; amount: any },
-  amount: any,
+  nft: NFTinDB,
+  amount: string | undefined,
   receiver: string
-) => {
-  let transferReceipt;
-  const options: any = {
+): Promise<Receipt> => {
+  let transferReceipt: Receipt;
+
+  const options: TransferOptions = {
     type: nft?.contract_type?.toLowerCase(),
     tokenId: nft?.token_id,
     receiver,
     contractAddress: nft?.token_address,
-    amount: nft?.contract_type?.toLowerCase() === "erc1155" ? amount ?? nft.amount : null,
-  } as const;
+    amount: nft?.contract_type?.toLowerCase() === "erc1155" ? amount ?? nft.amount : undefined,
+  };
 
   try {
     const tx: any = await Moralis.transfer(options);
@@ -27,18 +29,7 @@ export const transferNft = async (
     const link = `${getExplorer(chainId)}tx/${tx.hash}`;
     transferReceipt = { isSuccess: true, txHash: tx.hash, link: link };
     const title = "Transfer success";
-    const msg = (
-      <>
-        Your NFT {nft.token_id} has been transferred succesfully!
-        <br></br>
-        <a href={link} target="_blank" rel="noreferrer noopener">
-          View in explorer: &nbsp;
-          <FileSearchOutlined style={{ transform: "scale(1.3)", color: "purple" }} />
-        </a>
-      </>
-    );
-
-    openNotification("success", title, msg);
+    openNotification("success", title, <ReceiptMessage id={nft.token_id} link={link} />);
     console.log("Transfer success", tx);
   } catch (e) {
     const title = "Transfer denied";
@@ -78,11 +69,7 @@ export const approveNFTcontract = async (NFTaddress: string, contractAddress: st
 };
 
 // List pack for sale on the MarketPlace
-export const listOnMarketPlace = async (
-  nft: { token_address: any; token_id?: any },
-  listPrice: number,
-  contractAddress: string
-) => {
+export const listOnMarketPlace = async (nft: NFTinDB, listPrice: number, contractAddress: string) => {
   let response;
   const p = listPrice * 10 ** 18;
   const sendOptions = {
@@ -123,10 +110,10 @@ const filterEvents = (receipt: any[]) => {
 };
 
 // Buy NFT from the MarketPlace
-export const buyNFT = async (tokenAdd: string, marketAddress: string, nft: { itemId: string; price: string }) => {
+export const buyNFT = async (tokenAdd: string, marketAddress: string, nft: NFTinDB) => {
   let isSuccess;
-  const itemID = parseInt(nft.itemId);
-  const tokenPrice = parseInt(nft.price) * 10 ** 18;
+  const itemID = nft.itemId;
+  const tokenPrice = nft.price! * 10 ** 18;
 
   const sendOptions = {
     contractAddress: marketAddress,
@@ -153,4 +140,22 @@ export const buyNFT = async (tokenAdd: string, marketAddress: string, nft: { ite
     isSuccess = false;
   }
   return isSuccess;
+};
+
+interface Props {
+  id: string;
+  link: string;
+}
+
+const ReceiptMessage: React.FC<Props> = ({ id, link }) => {
+  return (
+    <>
+      Your NFT {id} has been transferred succesfully!
+      <br></br>
+      <a href={link} target="_blank" rel="noreferrer noopener">
+        View in explorer: &nbsp;
+        <FileSearchOutlined style={{ transform: "scale(1.3)", color: "purple" }} />
+      </a>
+    </>
+  );
 };

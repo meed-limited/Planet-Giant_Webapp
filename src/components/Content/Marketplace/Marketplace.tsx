@@ -22,7 +22,11 @@ const styles = {
   },
 } as const;
 
-const Marketplace: React.FC<any> = ({ isSupportedChain }) => {
+interface Props {
+  isSupportedChain: boolean;
+}
+
+const Marketplace: React.FC<Props> = ({ isSupportedChain }) => {
   const { chainId, isAuthenticated } = useMoralis();
   const { getMarketItemData, parseAllData } = useMoralisDb();
   const [marketItems, setMarketItems] = useState([]);
@@ -60,12 +64,12 @@ const Marketplace: React.FC<any> = ({ isSupportedChain }) => {
                     hoverable
                     size="small"
                     actions={[
-                      <Tooltip title="View On Blockexplorer">
+                      <Tooltip title="View On Blockexplorer" key={index}>
                         <FileSearchOutlined
                           onClick={() => window.open(`${getExplorer(chainId)}address/${nft.token_address}`, "_blank")}
                         />
                       </Tooltip>,
-                      <Tooltip title="Buy NFT">
+                      <Tooltip title="Buy NFT" key={index}>
                         <ShoppingCartOutlined onClick={() => handleBuyClick(nft)} />
                       </Tooltip>,
                     ]}

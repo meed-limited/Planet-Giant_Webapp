@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Navigate } from "react-router";
 import { useMoralis } from "react-moralis";
@@ -67,7 +67,8 @@ const styles = {
     color: "white",
   },
 } as const;
-const App = () => {
+
+const App: React.FC = () => {
   const { account, chainId, isWeb3Enabled, enableWeb3, isAuthenticated, isWeb3EnableLoading } = useMoralis();
   const { isMobile } = useUserData();
   const [isSupportedChain, setIsSupportedChain] = useState<boolean>();
@@ -105,7 +106,6 @@ const App = () => {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/marketplace" element={<Marketplace isSupportedChain={isSupportedChain} />} />
                 <Route path="*" element={<Navigate to="/dashboard" />} />
-                <Route path="/nonauthenticated" element={<>Please login using the "Authenticate" button</>} />
               </Routes>
             )}
           </div>

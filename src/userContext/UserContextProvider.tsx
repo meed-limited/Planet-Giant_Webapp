@@ -8,8 +8,8 @@ const UserDataProvider: React.FC<any> = ({ children }) => {
   const { account, chainId, isInitialized, isWeb3Enabled } = useMoralis();
   const Web3Api = useMoralisWeb3Api();
   const [width] = useWindowWidthAndHeight();
-  const [userNFTs, setUserNFTs] = useState<React.SetStateAction<any>>();
-  const [balance, setBalance] = useState<React.SetStateAction<any>>();
+  const [userNFTs, setUserNFTs] = useState<React.SetStateAction<UserNfts>>();
+  const [balance, setBalance] = useState<React.SetStateAction<string>>();
   const chain = getChain();
   const nftAddress = getNftAddress();
 

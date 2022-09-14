@@ -15,7 +15,7 @@ export const useVerifyMetadata = () => {
    * @param {object} NFT
    * @returns NFT
    */
-  function verifyMetadata(NFT: { metadata: any; token_uri: string | number }) {
+  function verifyMetadata(NFT: NFTinDB) {
     //Pass Through if Metadata already present
     if (NFT.metadata) return NFT;
     //Get the Metadata
@@ -30,7 +30,7 @@ export const useVerifyMetadata = () => {
    * @param {object} NFT
    * @returns void
    */
-  async function getMetadata(NFT: { metadata: any; token_uri: any }) {
+  async function getMetadata(NFT: NFTinDB) {
     //Validate URI
     if (!NFT.token_uri || !NFT.token_uri.includes("://")) {
       console.log("getMetadata() Invalid URI", { URI: NFT.token_uri, NFT });
@@ -78,7 +78,7 @@ export const useVerifyMetadata = () => {
    * @param {object} NFT
    * @param {object} metadata
    */
-  function setMetadata(NFT: { metadata: any; token_uri: any; image?: any }, metadata: { image: string }) {
+  function setMetadata(NFT: NFTinDB, metadata: NftAttributes) {
     //Add Metadata
     NFT.metadata = metadata;
     //Set Image
@@ -88,4 +88,4 @@ export const useVerifyMetadata = () => {
   } //setMetadata()
 
   return { verifyMetadata };
-}; //useVerifyMetadata()
+};

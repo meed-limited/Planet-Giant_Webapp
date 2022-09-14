@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useMoralis, useMoralisWeb3Api } from "react-moralis";
 import { getEllipsisTxt } from "../helpers/formatters";
 import Blockie from "./Blockie";

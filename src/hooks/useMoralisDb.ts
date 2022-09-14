@@ -1,3 +1,4 @@
+import Moralis from "moralis-v1/types";
 import { useMoralis } from "react-moralis";
 
 export const useMoralisDb = () => {
@@ -11,17 +12,17 @@ export const useMoralisDb = () => {
     return res;
   };
 
-  const parseAllData = async (res: any) => {
+  const parseAllData = async (res: Moralis.Object<Moralis.Attributes>[]) => {
     const parsedData = await JSON.parse(JSON.stringify(res));
     return parsedData;
   };
 
-  const parseData = async (res: any, owner: string) => {
+  const parseData = async (res: Moralis.Object<Moralis.Attributes>[], owner: string) => {
     const parsedData = await JSON.parse(JSON.stringify(res)).filter((item: { owner: string }) => item.owner === owner);
     return parsedData;
   };
 
-  const addItemImage = (nftToSend: { image: any; token_address: string; token_id: any; name: string }) => {
+  const addItemImage = (nftToSend: NFTinDB) => {
     const ItemImage = Moralis.Object.extend("ItemImages");
     const itemImage = new ItemImage();
     itemImage.set("image", nftToSend.image);
@@ -31,7 +32,7 @@ export const useMoralisDb = () => {
     itemImage.save();
   };
 
-  const saveMarketItemInDB = async (nft: NFTinDB, listPrice: any, itemId: any) => {
+  const saveMarketItemInDB = async (nft: NFTinDB, listPrice: string | number, itemId: number | undefined) => {
     const CreatedMarketItem = Moralis.Object.extend("CreatedMarketItems");
     const item = new CreatedMarketItem();
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useMoralis } from "react-moralis";
 import { Moralis } from "moralis-v1";
 import { getMarketplaceAddress } from "../../../constant/constant";
@@ -32,7 +32,13 @@ const styles = {
   },
 } as const;
 
-const BuyNftModal: React.FC<any> = ({ nftToBuy, setVisibility, visible }) => {
+interface Props {
+  nftToBuy: NFTinDB | null;
+  setVisibility: React.Dispatch<React.SetStateAction<boolean>>;
+  visible: boolean;
+}
+
+const BuyNftModal: React.FC<Props> = ({ nftToBuy, setVisibility, visible }) => {
   const { account } = useMoralis();
   const [loading, setLoading] = useState(false);
   const marketAddress = getMarketplaceAddress();
@@ -47,12 +53,14 @@ const BuyNftModal: React.FC<any> = ({ nftToBuy, setVisibility, visible }) => {
 
   const purchase = async () => {
     setLoading(true);
-    const tokenAdd = nftToBuy.token_address;
-    const res = await buyNFT(tokenAdd, marketAddress, nftToBuy);
+    if (nftToBuy) {
+      const tokenAdd = nftToBuy.token_address;
+      const res = await buyNFT(tokenAdd, marketAddress, nftToBuy);
 
-    if (res) {
-      updateSoldMarketItem();
-      setVisibility(false);
+      if (res) {
+        updateSoldMarketItem();
+        setVisibility(false);
+      }
     }
     setLoading(false);
   };
@@ -61,12 +69,14 @@ const BuyNftModal: React.FC<any> = ({ nftToBuy, setVisibility, visible }) => {
     const id = nftToBuy?.objectId;
     const marketList = Moralis.Object.extend("CreatedMarketItems");
     const query = new Moralis.Query(marketList);
-    await query.get(id).then((obj) => {
-      obj.set("sold", true);
-      obj.set("owner", account);
-      obj.set("collectionName", nftToBuy.collectionName);
-      obj.save();
-    });
+    if (id) {
+      await query.get(id).then((obj) => {
+        obj.set("sold", true);
+        obj.set("owner", account);
+        obj.set("collectionName", nftToBuy.collectionName);
+        obj.save();
+      });
+    }
   };
 
   const titleLevel = nftToBuy != null ? getLevelForTitle(nftToBuy) : "";

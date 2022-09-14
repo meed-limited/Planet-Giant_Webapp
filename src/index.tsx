@@ -1,4 +1,4 @@
-// import React from "react";
+import React from "react";
 import { createRoot } from "react-dom/client";
 import { MoralisProvider } from "react-moralis";
 import { UserDataProvider } from "./userContext/UserContextProvider";
@@ -9,7 +9,7 @@ import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 const APP_ID = process.env.REACT_APP_MORALIS_APPLICATION_ID;
 const SERVER_URL = process.env.REACT_APP_MORALIS_SERVER_URL;
 
-const Application = () => {
+const Application: React.FC = () => {
   if (APP_ID && SERVER_URL) {
     return (
       // <React.StrictMode>

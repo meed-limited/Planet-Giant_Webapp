@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useMoralis } from "react-moralis";
 import AddressInput from "../../../AddressInput";
 import { transferNft } from "../../../../helpers/contractCall/writeCall";
@@ -8,14 +8,14 @@ import { getLevelForTitle } from "../../../../helpers/getNftAttributes";
 const TransferNftModal: React.FC<any> = ({ nftToTransfer, setVisibility, visible }) => {
   const { chainId } = useMoralis();
   const [receiverToSend, setReceiver] = useState<any>(null);
-  const [amountToSend, setAmount] = useState(null);
+  const [amountToSend, setAmount] = useState(undefined);
   const [isPending, setIsPending] = useState(false);
 
   const handleChange = (e: any) => {
     setAmount(e.target.value);
   };
 
-  const transfer = async (nft: NFTinDB, amount: null, receiver: string) => {
+  const transfer = async (nft: NFTinDB, amount: string | undefined, receiver: string) => {
     setIsPending(true);
     const success = await transferNft(chainId, nft, amount, receiver);
     if (success) {
