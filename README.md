@@ -1,6 +1,6 @@
 <div align="center">
 <img src="./src/assets/logo.png" width="500px"/>
-<h2><strong> Planet Giant - Web App (Dashboard & Marketplace) </strong></h2>
+<h1><strong> Planet Giant - Web App (Dashboard & Marketplace) </strong></h1>
 <h2>Cronos & Moralis Hackathon - 09/2022</h2>
 <br></br>
 
@@ -10,8 +10,7 @@
 
 <br></br>
 
-<!-- ![Preview](./src/assets/preview.gif) -->
-<img src="./src/assets/preview.gif" />
+![Preview](./src/assets/preview.gif)
 
 </div>
 
