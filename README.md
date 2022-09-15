@@ -9,7 +9,7 @@
 
 <br></br>
 
-![Preview](./src/assets/images/preview.gif)
+![Preview](./src/assets/preview.gif)
 
 </div>
 
