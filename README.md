@@ -1,6 +1,7 @@
 <div align="center">
-<h1><strong> PLANET GIANT </strong></h1>
-<h2><strong> Cronos & Moralis Hackathon - 09/2022 </strong></h2>
+<img src="./src/assets/logo.png" width="500px"/>
+<h2><strong> Planet Giant - Web App (Dashboard & Marketplace) </strong></h2>
+<h2>Cronos & Moralis Hackathon - 09/2022</h2>
 <br></br>
 
 [![Stargazers](https://img.shields.io/github/stars/shamrockstudios/Planet-Giant_Webapp)](https://github.com/shamrockstudios/Planet-Giant_Webapp/stargazers)
