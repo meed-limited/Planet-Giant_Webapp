@@ -80,9 +80,10 @@ yarn start
 <br></br>
 
 <div align="center">
-# A BIG THANKS TO MORALIS, CRONOS AND THEIR RESPECTIVE TEAMS !!!
 
-### ⭐️ Don't forget to leave a star if you like it! ⭐️
+### A BIG THANKS TO MORALIS, CRONOS AND THEIR RESPECTIVE TEAMS !!!
+
+### ⭐️ ...and don't forget to leave a star if you like it! ⭐️
 
 </div>
 
