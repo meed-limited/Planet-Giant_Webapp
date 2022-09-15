@@ -10,7 +10,8 @@
 
 <br></br>
 
-![Preview](./src/assets/preview.gif)
+<!-- ![Preview](./src/assets/preview.gif) -->
+<img src="./src/assets/preview.gif" />
 
 </div>
 
