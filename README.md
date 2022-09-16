@@ -26,7 +26,7 @@ The entire project is divided in 3 parts. Here are the links to all the differen
 
 ## Description
 
-This web app is divided into:
+This Dapp is divided into:
 
 - Dashboard: all any player to quiclly see their amounts of CRO token as well as all the NFTs that they own. From there, it is also easy to transfer an NFT or to put an NFT on sale on the Marketplace.
 - Marketplace: Allow any user to buy NFT in order to gain perks and boost in the Planet-Giant Game. The NFT won in-game can also be sold here.
