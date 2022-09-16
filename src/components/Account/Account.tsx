@@ -9,6 +9,7 @@ import { getEllipsisTxt } from "../../helpers/formatters";
 import { Button, Card, Modal } from "antd";
 import { SelectOutlined } from "@ant-design/icons";
 import Text from "antd/lib/typography/Text";
+import { IS_PRODUCTION } from "../../constant/constant";
 
 const styles = {
   account: {
@@ -86,8 +87,12 @@ const Account: React.FC = () => {
   const switchChain = async () => {
     try {
       await window.ethereum.request({
+        method: "wallet_addEthereumChain",
+        params: IS_PRODUCTION ? [{ ...cronos_mainnet }] : [{ ...cronos_testnet }],
+      });
+      await window.ethereum.request({
         method: "wallet_switchEthereumChain",
-        params: [{ chainId: "0x152" }],
+        params: IS_PRODUCTION ? [{ chainId: "0x152" }] : [{ chainId: "0x19" }],
       });
       console.log("changed");
     } catch (e) {
@@ -207,3 +212,27 @@ const Account: React.FC = () => {
 };
 
 export default Account;
+
+const cronos_mainnet = {
+  chainId: "0x19",
+  blockExplorerUrls: ["https://cronoscan.com/"],
+  chainName: "Cronos",
+  nativeCurrency: {
+    name: "CRO",
+    symbol: "CRO",
+    decimals: 18,
+  },
+  rpcUrls: ["https://evm.cronos.org"],
+};
+
+const cronos_testnet = {
+  chainId: "0x152",
+  blockExplorerUrls: ["https://testnet.cronoscan.com/"],
+  chainName: "Cronos testnet",
+  nativeCurrency: {
+    name: "TCRO",
+    symbol: "TCRO",
+    decimals: 18,
+  },
+  rpcUrls: ["https://evm-t3.cronos.org"],
+};
