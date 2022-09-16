@@ -88,7 +88,7 @@ const Account: React.FC = () => {
     try {
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
-        params: IS_PRODUCTION ? [{ chainId: "0x152" }] : [{ chainId: "0x19" }],
+        params: IS_PRODUCTION ? [{ chainId: "0x19" }] : [{ chainId: "0x152" }],
       });
     } catch (switchError: any) {
       if (switchError.code === 4902) {
