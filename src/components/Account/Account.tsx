@@ -87,16 +87,21 @@ const Account: React.FC = () => {
   const switchChain = async () => {
     try {
       await window.ethereum.request({
-        method: "wallet_addEthereumChain",
-        params: IS_PRODUCTION ? [{ ...cronos_mainnet }] : [{ ...cronos_testnet }],
-      });
-      await window.ethereum.request({
         method: "wallet_switchEthereumChain",
         params: IS_PRODUCTION ? [{ chainId: "0x152" }] : [{ chainId: "0x19" }],
       });
+    } catch (switchError: any) {
+      if (switchError.code === 4902) {
+        try {
+          await window.ethereum.request({
+            method: "wallet_addEthereumChain",
+            params: IS_PRODUCTION ? [{ ...cronos_mainnet }] : [{ ...cronos_testnet }],
+          });
+        } catch (e) {
+          console.error(e);
+        }
+      }
       console.log("changed");
-    } catch (e) {
-      console.error(e);
     }
   };
 
